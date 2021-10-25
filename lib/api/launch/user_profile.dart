@@ -1,0 +1,3 @@
+class UserProfile{
+  String? userName;
+}
