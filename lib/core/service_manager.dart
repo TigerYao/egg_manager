@@ -1,41 +1,43 @@
 import 'dart:async';
+import 'package:egg_manager/api/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:egg_service_manager/service_manager.dart';
+
+import 'base_provider.dart';
 
 T byService<T extends IService>() {
   return Get.find<T>();
 }
 
-void jumpToPage(String pageName){
-  Get.toNamed(pageName);
+void jumpToPage(String pageName,{dynamic args}){
+  Get.toNamed(pageName,arguments: args);
 }
 
 abstract class IService extends GetxController{
   final List<GetPage> pages = [];
   /// 增加各模块内部路由实现
    void addRoute(String routName, Widget page){
-    pages.add(GetPage(name: routName, page: ()=>page));
+     AppPages.pages.add(GetPage(name: routName, page: ()=>page));
   }
 
-  void navigationTo(String routName,{dynamic? args}){
-     Get.toNamed<dynamic>(routName,arguments: args);
+  void navigationTo(String routName,{dynamic args}){
+    Get.toNamed<dynamic>(routName,arguments: args);
   }
 }
 
 class ServiceManager {
-  factory ServiceManager() => _instance ??= ServiceManager._();
+  factory ServiceManager() => _instance = ServiceManager._();
 
   ServiceManager._();
-  final List<GetPage> pages = [];
-  static ServiceManager? _instance;
+  static ServiceManager _instance;
   final GetStorage box = GetStorage();
-  late final BaseProvider provider;
+  final BaseProvider provider = Get.put(BaseProvider());
   void init(){
-    box.listenKey('token', onTokenChanged);
-    onTokenChanged(getValue<String>('token'));
-    provider = new BaseProvider();
+    if(box.hasData('token')) {
+      box.listenKey('token', onTokenChanged);
+      onTokenChanged(getValue<String>('token'));
+    }
   }
 
   void onTokenChanged(dynamic value){
@@ -58,9 +60,11 @@ class ServiceManager {
    return box.read<S>(key);
   }
 
+  void navigationTo(String routName,{dynamic args}){
+    Get.toNamed<dynamic>(routName,arguments: args);
+  }
+
   void addService<T extends IService>(T service) {
     Get.put(service);
-    final List<GetPage> runts = service.pages;
-    pages.addAll(runts);
   }
 }

@@ -1,5 +1,7 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
-import 'package:egg_service_manager/service_manager.dart';
+import 'package:egg_manager/service_manager.dart';
 
 import 'base_model.dart';
 
@@ -8,17 +10,18 @@ typedef ResponseInterceptor = bool Function(dynamic data);
 const String _defaultBaseUrl = 'https://hooks.slack.com/services/';
 
 class BaseProvider extends GetConnect {
-  String? serviceUrl = _defaultBaseUrl;
+  String serviceUrl;
 
-  BaseProvider({this.serviceUrl});
+  BaseProvider({this.serviceUrl = _defaultBaseUrl});
 
   @override
   void onInit() {
     super.onInit();
     httpClient.baseUrl = serviceUrl;
+    print("BaseProvider....onInit..${httpClient.baseUrl}");
   }
 
-  void onTokenChange(String token){
+  void onTokenChange(String token) {
     httpClient.addRequestModifier((request) {
       final String token = ServiceManager().getValue<String>('token');
       request.headers['token'] = token;
@@ -26,23 +29,19 @@ class BaseProvider extends GetConnect {
     });
   }
 
-  Future<Response<T>> requestData<T extends BaseMode>(String path,
+  Future<Response<T>> requestData<T>(String path,
       dynamic params,
       {bool isPost = true}) {
-    if (isPost) {
-      return post(path, params);
+    var req = {'text': params};
+    if (params != null && params is BaseMode) {
+      req = {'text': json.encode(params)};
     }
-    if (params?.isNotEmpty == true && params is BaseMode) {
-      return get(path, query: params.toJson());
-    } else if (params?.isNotEmpyt == true && params is Map<String, dynamic>)
-      return get(path, query: params);
-    else
-      return get(path);
+    return isPost ? post(path, req) : get(path, query: req);
   }
 
-  Future<Response<T>> getData<T extends BaseMode>(String path, dynamic params,
-      {ResponseInterceptor? success,
-        ResponseInterceptor? fail,
+  Future<Response<T>> getData<T>(String path, dynamic params,
+      {ResponseInterceptor success,
+        ResponseInterceptor fail,
         bool isPost = true}) {
     Future<Response<T>> result = requestData<T>(path, params, isPost: isPost);
     if (success != null && fail != null)
