@@ -73,7 +73,7 @@ class ServiceManager {
     return await box.writeIfNull(key, value);
   }
 
-  S getValue<S>(String key){
+  S? getValue<S>(String key){
    return box.read<S>(key);
   }
 

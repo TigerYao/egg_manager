@@ -5,7 +5,7 @@ import 'package:egg_manager/service_manager.dart';
 
 import 'base_model.dart';
 
-typedef ResponseInterceptor = bool Function(dynamic data);
+typedef ResponseInterceptor = void Function(dynamic data);
 
 const String _defaultBaseUrl = 'https://hooks.slack.com/services/';
 
@@ -22,8 +22,8 @@ class BaseProvider extends GetConnect {
   }
 
   void onTokenChange(String token) {
-    httpClient.addRequestModifier((request) {
-      final String token = ServiceManager().getValue<String>('token');
+    httpClient.addRequestModifier<dynamic>((request) {
+      final String token = ServiceManager().getValue<String>('token')??'';
       request.headers['token'] = token;
       return request;
     });
