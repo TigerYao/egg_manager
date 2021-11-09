@@ -1,3 +1,3 @@
 class UserProfile{
-  String userName;
+  String? userName;
 }

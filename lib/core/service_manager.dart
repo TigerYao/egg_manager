@@ -16,6 +16,23 @@ void jumpToPage(String pageName,{dynamic args}){
 
 abstract class IService extends GetxController{
   final List<GetPage> pages = [];
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
+  @override
+  void onReady() {
+    // TODO: implement onReady
+    super.onReady();
+  }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+  }
+
   /// 增加各模块内部路由实现
    void addRoute(String routName, Widget page){
      AppPages.pages.add(GetPage(name: routName, page: ()=>page));
@@ -30,7 +47,7 @@ class ServiceManager {
   factory ServiceManager() => _instance = ServiceManager._();
 
   ServiceManager._();
-  static ServiceManager _instance;
+  static ServiceManager? _instance;
   final GetStorage box = GetStorage();
   final BaseProvider provider = Get.put(BaseProvider());
   void init(){

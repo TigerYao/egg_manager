@@ -40,8 +40,8 @@ class BaseProvider extends GetConnect {
   }
 
   Future<Response<T>> getData<T>(String path, dynamic params,
-      {ResponseInterceptor success,
-        ResponseInterceptor fail,
+      {ResponseInterceptor? success,
+        ResponseInterceptor? fail,
         bool isPost = true}) {
     Future<Response<T>> result = requestData<T>(path, params, isPost: isPost);
     if (success != null && fail != null)

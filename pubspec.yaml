@@ -5,7 +5,7 @@ author:
 homepage:
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
@@ -14,10 +14,11 @@ dependencies:
   fixnum: ^1.0.0
   hive: ^2.0.4
   protobuf: ^2.0.0
-  get: ^3.26.0
+  get: any
   get_storage: ^1.4.0
-  egg_network:
-    path: ../egg_network
+  firebase_core: ^0.7.0
+  firebase_analytics: ^7.0.1
+  firebase_crashlytics: ^0.4.0+1
 
 dev_dependencies:
   flutter_test:
