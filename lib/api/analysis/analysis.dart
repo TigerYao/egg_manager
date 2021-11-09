@@ -1,5 +1,6 @@
 import 'package:egg_manager/core/service_manager.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 /// 统计分析服务
@@ -8,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 @deprecated
 abstract class IAnalysisService extends IService {
   static final FirebaseAnalytics _analytics = FirebaseAnalytics();
+  const FirebaseAnalyticsObserver firebaseAnalyticsObserver() => FirebaseAnalyticsObserver(analytics: _analytics);
   @override
   void onInit() {
     super.onInit();
