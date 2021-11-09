@@ -6,10 +6,9 @@ import 'package:firebase_core/firebase_core.dart';
 /// 统计分析服务
 ///
 /// 统计分析服务，用于埋点。方便后续埋点的整体切换与通用信息的统一处理。
-@deprecated
 abstract class IAnalysisService extends IService {
   static final FirebaseAnalytics _analytics = FirebaseAnalytics();
-  const FirebaseAnalyticsObserver firebaseAnalyticsObserver() => FirebaseAnalyticsObserver(analytics: _analytics);
+  FirebaseAnalyticsObserver firebaseAnalyticsObserver() => FirebaseAnalyticsObserver(analytics: _analytics);
   @override
   void onInit() {
     super.onInit();
