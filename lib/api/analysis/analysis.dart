@@ -34,18 +34,23 @@ abstract class IAnalysisService extends IService {
   void sendEvent(String name, {Map<String, Object?>? params}){
     _analytics.logEvent(name: name,parameters: params);
   }
+
 }
 
 /// Event的Action类型，目前只有click类型
 enum EventAction {
   /// click类型的action
-  click
+  click,
+  login,
+  app_open,
+  app_close,
+  page_name
 }
 
 extension EventActionExt on EventAction {
   /// action的文本信息
   String get text {
-    String result;
+   late String result;
     switch (this) {
       case EventAction.click:
         result = 'click';
