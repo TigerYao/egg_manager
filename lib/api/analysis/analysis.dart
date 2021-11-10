@@ -31,8 +31,8 @@ abstract class IAnalysisService extends IService {
   /// [params] 对应埋点文档中的 **event label** 字段
   Future<void> sendClickEvent(String eventName, {String? pageName, Map<String, Object?>? params});
 
-  void sendEvent(String name, {Map<String, Object?>? params}){
-    _analytics.logEvent(name: name,parameters: params);
+  Future<void> sendEvent(String name, {Map<String, Object?>? params}){
+    return _analytics.logEvent(name: name,parameters: params);
   }
 
 }
