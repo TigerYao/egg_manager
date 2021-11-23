@@ -22,17 +22,17 @@ abstract class IAnalysisService extends IService {
   /// [action] 对应埋点文档中的 **track_action** 字段
   /// [pageName] 对应埋点文档中的 **pageName** 字段
   /// [params] 对应埋点文档中的 **event label** 字段
-  Future<void> sendAnalyticsEvent(String eventName, EventAction action,
+  Future<void> sendAnalyticsEvent(String? eventName, EventAction? action,
       {String? pageName, Map<String, Object?>? params});
 
   /// 发送 click 类型的埋点事件
   /// [category] 对应埋点文档中的 **category** 字段
   /// [pageName] 对应埋点文档中的 **pageName** 字段
   /// [params] 对应埋点文档中的 **event label** 字段
-  Future<void> sendClickEvent(String eventName, {String? pageName, Map<String, Object?>? params});
+  Future<void> sendClickEvent(String? eventName, {String? pageName, Map<String, Object>? params});
 
-  Future<void> sendEvent(String name, {Map<String, Object?>? params}){
-    return _analytics.logEvent(name: name,parameters: params);
+  Future<void> sendEvent(String? name, {Map<String, Object>? params}){
+    return _analytics.logEvent(name: name??'',parameters: params);
   }
 
 }

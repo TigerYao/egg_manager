@@ -10,7 +10,7 @@ T byService<T extends IService>() {
   return Get.find<T>();
 }
 
-void jumpToPage(String pageName,{dynamic args}){
+void jumpToPage(String pageName,{dynamic args, Bindings? binding}){
   Get.toNamed(pageName,arguments: args);
 }
 
@@ -34,8 +34,8 @@ abstract class IService extends GetxController{
   }
 
   /// 增加各模块内部路由实现
-   void addRoute(String routName, Widget page){
-     AppPages.pages.add(GetPage(name: routName, page: ()=>page));
+   void addRoute(String routName, Widget page,{Bindings? binding}){
+     AppPages.pages.add(GetPage(name: routName, page: ()=>page, binding: binding));
   }
 
   void navigationTo(String routName,{dynamic args}){
