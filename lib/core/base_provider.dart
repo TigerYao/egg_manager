@@ -18,20 +18,17 @@ class BaseProvider extends GetConnect {
   void onInit() {
     super.onInit();
     httpClient.baseUrl = serviceUrl;
-    print("BaseProvider....onInit..${httpClient.baseUrl}");
   }
 
   void onTokenChange(String token) {
     httpClient.addRequestModifier<dynamic>((request) {
-      final String token = ServiceManager().getValue<String>('token')??'';
+      final String token = ServiceManager().getValue<String>('token') ?? '';
       request.headers['token'] = token;
       return request;
     });
   }
 
-  Future<Response<T>> requestData<T>(String path,
-      dynamic params,
-      {bool isPost = true}) {
+  Future<Response<T>> requestData<T>(String path, dynamic params, {bool isPost = true}) {
     var req = {'text': params};
     if (params != null && params is BaseMode) {
       req = {'text': json.encode(params)};
@@ -40,9 +37,7 @@ class BaseProvider extends GetConnect {
   }
 
   Future<Response<T>> getData<T>(String path, dynamic params,
-      {ResponseInterceptor? success,
-        ResponseInterceptor? fail,
-        bool isPost = true}) {
+      {ResponseInterceptor? success, ResponseInterceptor? fail, bool isPost = true}) {
     Future<Response<T>> result = requestData<T>(path, params, isPost: isPost);
     if (success != null && fail != null)
       result.then((Response<T> value) {

@@ -1,14 +1,14 @@
 <component name="libraryTable">
   <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
     <CLASSES>
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path_provider_windows-2.0.4" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path_provider-2.0.4" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/firebase_core_web-1.2.0" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/firebase_core-1.10.0" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/firebase_analytics-8.3.4" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/firebase_crashlytics-2.3.0" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path_provider_linux-2.1.2" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/firebase_analytics_web-0.3.0+1" />
+      <root url="file://$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.flutter-io.cn/firebase_core_web-1.2.0" />
+      <root url="file://$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.flutter-io.cn/path_provider_windows-2.0.4" />
+      <root url="file://$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.flutter-io.cn/firebase_crashlytics-2.3.0" />
+      <root url="file://$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.flutter-io.cn/firebase_analytics-8.3.4" />
+      <root url="file://$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.flutter-io.cn/firebase_core-1.10.0" />
+      <root url="file://$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.flutter-io.cn/firebase_analytics_web-0.3.0+1" />
+      <root url="file://$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.flutter-io.cn/path_provider_linux-2.1.2" />
+      <root url="file://$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.flutter-io.cn/path_provider-2.0.7" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

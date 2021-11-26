@@ -10,12 +10,11 @@ T byService<T extends IService>() {
   return Get.find<T>();
 }
 
-void jumpToPage(String pageName,{dynamic args, Bindings? binding}){
-  Get.toNamed(pageName,arguments: args);
+void jumpToPage(String pageName, {dynamic args, Bindings? binding}) {
+  Get.toNamed(pageName, arguments: args);
 }
 
-abstract class IService extends GetxController{
-  final List<GetPage> pages = [];
+abstract class IService extends GetxController {
   @override
   void onInit() {
     super.onInit();
@@ -23,41 +22,41 @@ abstract class IService extends GetxController{
 
   @override
   void onReady() {
-    // TODO: implement onReady
     super.onReady();
   }
 
   @override
   void onClose() {
-    // TODO: implement onClose
     super.onClose();
   }
 
   /// 增加各模块内部路由实现
-   void addRoute(String routName, Widget page,{Bindings? binding}){
-     AppPages.pages.add(GetPage(name: routName, page: ()=>page, binding: binding));
+  void addRoute(String routName, Widget page, {Bindings? binding}) {
+    AppPages.pages.add(GetPage(name: routName, page: () => page, binding: binding));
   }
 
-  void navigationTo(String routName,{dynamic args}){
-    Get.toNamed<dynamic>(routName,arguments: args);
+  void navigationTo(String routName, {dynamic args}) {
+    Get.toNamed<dynamic>(routName, arguments: args);
   }
 }
 
 class ServiceManager {
-  factory ServiceManager() => _instance = ServiceManager._();
+  factory ServiceManager() => _instance ??= ServiceManager._();
 
   ServiceManager._();
+
   static ServiceManager? _instance;
   final GetStorage box = GetStorage();
   final BaseProvider provider = Get.put(BaseProvider());
-  void init(){
-    if(box.hasData('token')) {
+
+  void init() {
+    if (box.hasData('token')) {
       box.listenKey('token', onTokenChanged);
       onTokenChanged(getValue<String>('token'));
     }
   }
 
-  void onTokenChanged(dynamic value){
+  void onTokenChanged(dynamic value) {
     provider.onTokenChange(value);
   }
 
@@ -65,23 +64,23 @@ class ServiceManager {
     return Get.find<T>();
   }
 
-  Future<void> saveToken(String token){
+  Future<void> saveToken(String token) {
     return writeValue('token', token);
   }
 
-  Future<void> writeValue(String key, dynamic value)async{
+  Future<void> writeValue(String key, dynamic value) async {
     return await box.writeIfNull(key, value);
   }
 
-  S? getValue<S>(String key){
-   return box.read<S>(key);
+  S? getValue<S>(String key) {
+    return box.read<S>(key);
   }
 
-  void navigationTo(String routName,{dynamic args}){
-    Get.toNamed<dynamic>(routName,arguments: args);
+  void navigationTo(String routName, {dynamic args}) {
+    Get.toNamed<dynamic>(routName, arguments: args);
   }
 
   void addService<T extends IService>(T service) {
-    Get.put(service);
+      Get.lazyPut(() => service);
   }
 }
