@@ -30,13 +30,8 @@ abstract class IService extends GetxController {
     super.onClose();
   }
 
-  /// 增加各模块内部路由实现
-  void addRoute(String routName, Widget page, {Bindings? binding}) {
-    AppPages.pages.add(GetPage(name: routName, page: () => page, binding: binding));
-  }
-
-  void navigationTo(String routName, {dynamic args}) {
-    Get.toNamed<dynamic>(routName, arguments: args);
+  GetPage? getPages() {
+    return null;
   }
 }
 
@@ -81,6 +76,8 @@ class ServiceManager {
   }
 
   void addService<T extends IService>(T service) {
-      Get.lazyPut(() => service);
+    if (service.getPages() != null)
+      AppPages.pages.add(service.getPages()!);
+    Get.lazyPut(() => service);
   }
 }
